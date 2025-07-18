@@ -1,5 +1,5 @@
-@import "tailwindcss";
-@import "tw-animate-css";
+@import 'tailwindcss';
+@import 'tw-animate-css';
 
 @custom-variant dark (&:is(.dark *));
 
@@ -113,7 +113,17 @@
 }
 
 @layer base {
- *{
-  @apply m-0 p-0 box-border
- }
+  * {
+    @apply m-0 p-0 box-border;
+  }
+}
+@layer utilities {
+  .border-1 {
+    @apply border-2 border-red-700;
+  }
+
+  .highlight-link a,
+  a.highlight-link {
+    @apply text-sky-700 hover:underline hover:text-orange-700;
+  }
 }

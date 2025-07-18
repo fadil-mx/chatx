@@ -1,5 +1,13 @@
+import { UserValidator } from '@/types'
 import { Document, model, models, Schema } from 'mongoose'
-const UseSchema = new Schema({
+
+interface IUser extends Document,UserValidator {
+    _id: string;
+    createdAt: Date;
+    updatedAt: Date;
+} 
+
+const UseSchema = new Schema<IUser>({
     name:{
         type: String,
         required: true
@@ -19,4 +27,6 @@ const UseSchema = new Schema({
     timestamps: true
 })
 
- export const User=models.User || model("User", UseSchema)
+const User=models.User || model<IUser>("User", UseSchema)
+
+export default User
