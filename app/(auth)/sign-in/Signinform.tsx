@@ -22,6 +22,8 @@ import Link from 'next/link'
 import { toast } from 'sonner'
 import { signInWithCredentials } from '@/lib/actions/User.action'
 import { isRedirectError } from 'next/dist/client/components/redirect-error'
+import SeparatorWithOr from '@/components/shared/Separator'
+import { GoogleSignInForm } from '@/components/shared/Googlelogin'
 
 const Signin = () => {
   const searchparams = useSearchParams()
@@ -118,6 +120,9 @@ const Signin = () => {
               Sign Up
             </Link>
           </p>
+
+          <SeparatorWithOr>or</SeparatorWithOr>
+          <GoogleSignInForm />
         </CardContent>
       </Card>
     </div>

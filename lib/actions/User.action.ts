@@ -25,6 +25,10 @@ export const registerUser = async (userData: UserSignUPValidator) => {
   }
 }
 
+export async function signInWithGoogle() {
+  await signIn('google')
+}
+
 export async function signInWithCredentials(user: UserSignINValidator) {
   try {
     return await signIn('credentials', { ...user, redirect: false })

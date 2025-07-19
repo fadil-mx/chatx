@@ -13,7 +13,7 @@ export default function RootLayout({
 }) {
   return (
     <html>
-      <body className='bg-[#212121] '>
+      <body className='bg-[#303030] '>
         <Navbar />
         <main> {children}</main>
       </body>

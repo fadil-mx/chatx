@@ -22,6 +22,8 @@ import { Separator } from '@/components/ui/separator'
 import Link from 'next/link'
 import { registerUser, signInWithCredentials } from '@/lib/actions/User.action'
 import { toast } from 'sonner'
+import SeparatorWithOr from '@/components/shared/Separator'
+import { GoogleSignInForm } from '@/components/shared/Googlelogin'
 
 const Signupform = () => {
   const searchparams = useSearchParams()
@@ -172,6 +174,8 @@ const Signupform = () => {
                 Sign In
               </Link>
             </p>
+            <SeparatorWithOr>or</SeparatorWithOr>
+            <GoogleSignInForm />
           </div>
         </CardContent>
       </Card>
