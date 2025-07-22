@@ -13,14 +13,18 @@ import {
   DropdownMenuTrigger,
 } from '@/components/ui/dropdown-menu'
 import { Avatar, AvatarFallback, AvatarImage } from '@/components/ui/avatar'
-import { LogOut, Settings, User } from 'lucide-react'
+import { LogOut, Settings } from 'lucide-react'
+import { SidebarTrigger } from '@/components/ui/sidebar'
 
 const Navbar = async () => {
   const session = await auth()
 
   return (
     <div className='p-5 text-white flex justify-between items-center'>
-      <h2 className=' text-2xl font-bold'>Chat-X</h2>
+      <div className='flex items-center gap-4'>
+        <SidebarTrigger />
+        <h2 className=' text-2xl font-bold'>Chat-X</h2>
+      </div>
       {session ? (
         <div className=''>
           <DropdownMenu>
