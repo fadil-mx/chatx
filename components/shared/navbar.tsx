@@ -20,7 +20,7 @@ const Navbar = async () => {
   const session = await auth()
 
   return (
-    <div className='p-5 text-white flex justify-between items-center'>
+    <div className='p-5 sticky top-0 bg-black text-white flex justify-between items-center'>
       <div className='flex items-center gap-4'>
         <SidebarTrigger />
         <h2 className=' text-2xl font-bold'>Chat-X</h2>
