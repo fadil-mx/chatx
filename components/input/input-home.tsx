@@ -14,11 +14,11 @@ const Inputhome = () => {
       headers: {
         'content-type': 'application/json',
       },
-      body: JSON.stringify({ input: text }),
+      body: JSON.stringify({ prompt: text }),
     })
     const data = await res.json()
-    alert(`Response: ${data.message}`)
-    // router.push(`/chat/${data.chatId}`)
+    alert(`Response: ${data.message} Chat ID: ${data.chatId}`)
+    router.push(`/chat/${data.chatId}`)
   }
 
   return (

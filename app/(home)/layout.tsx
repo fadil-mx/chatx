@@ -14,21 +14,18 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
-      <body
-        className='\
-      // bg-[#303030] 
+    <div
+      className='
       bg-black
       '
-      >
-        <SidebarProvider>
-          <AppSidebar />
-          <main className='w-full'>
-            <Navbar />
-            <div className='px-4 '> {children}</div>
-          </main>
-        </SidebarProvider>
-      </body>
-    </html>
+    >
+      <SidebarProvider>
+        <AppSidebar />
+        <main className='w-full'>
+          <Navbar />
+          <div className='px-4 '> {children}</div>
+        </main>
+      </SidebarProvider>
+    </div>
   )
 }

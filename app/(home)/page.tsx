@@ -1,7 +1,13 @@
+import { auth } from '@/auth'
 import Inputhome from '@/components/input/input-home'
+import { redirect } from 'next/navigation'
 import React from 'react'
 
-const Page = () => {
+const Page = async () => {
+  const session = await auth()
+  if (!session?.user?.id) {
+    redirect('/sign-up?callbackUrl=/') // Redirect to sign-up if not authenticated
+  }
   return (
     <div className='flex flex-col min-h-screen bg-black text-white'>
       <div className='flex-1 overflow-y-auto p-4'>

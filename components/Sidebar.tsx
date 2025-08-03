@@ -14,19 +14,11 @@ import {
 import Link from 'next/link'
 import { Button } from './ui/button'
 import Edit from './sidebar/edit'
+import { getChats } from '@/lib/actions/chat.action'
 
-const items = [
-  {
-    title: 'hei there',
-    url: '#',
-  },
-  {
-    title: 'react basics',
-    url: '#',
-  },
-]
+export async function AppSidebar() {
+  const items = await getChats()
 
-export function AppSidebar() {
   return (
     <Sidebar>
       <SidebarContent>
@@ -48,13 +40,16 @@ export function AppSidebar() {
           <SidebarSeparator className='bg-gray-400 w-full m-0 mt-4' />
           <SidebarGroupContent>
             <SidebarMenu className='space-y-4 mt-4'>
-              {items.map((item) => (
-                <SidebarMenuItem key={item.title} className=''>
+              {items.data.map((item: any) => (
+                <SidebarMenuItem key={item._id} className=''>
                   <SidebarMenuButton className='text-white text-lg' asChild>
                     <div className='w-full  flex items-center justify-between '>
-                      <Link href={item.url} className='flex items-center gap-2'>
+                      <Link
+                        href={`/chat/${item._id}`}
+                        className='flex items-center gap-2'
+                      >
                         <MessageSquare size={28} />
-                        <span>{item.title}</span>
+                        <span>{item.title}.....</span>
                       </Link>
                       <Edit />
                     </div>

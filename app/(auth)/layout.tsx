@@ -12,11 +12,11 @@ export default function RootLayout({
   children: React.ReactNode
 }) {
   return (
-    <html>
-      <body className='min-h-screen flex items-center justify-center bg-gray-50'>
+    <div>
+      <div className='min-h-screen flex items-center justify-center bg-gray-50'>
         <main className=' w-full max-w-md min-w-80 p-6 '>{children}</main>
         <Toaster />
-      </body>
-    </html>
+      </div>
+    </div>
   )
 }

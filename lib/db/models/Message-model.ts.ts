@@ -19,6 +19,6 @@ const messageSchema = new Schema(
   }
 )
 
-const Message = models.Chat || model('Chat', messageSchema)
+const Message = models.Message || model('Message', messageSchema)
 
 export default Message
