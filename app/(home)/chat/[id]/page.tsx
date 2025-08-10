@@ -1,6 +1,6 @@
 'use client'
 
-import React, { useEffect, useState } from 'react'
+import React, { use, useEffect, useState } from 'react'
 import { useParams } from 'next/navigation'
 import ChatMessage from '@/components/ChatMessage'
 import { Textarea } from '@/components/ui/textarea'
@@ -14,6 +14,7 @@ import {
   SelectTrigger,
   SelectValue,
 } from '@/components/ui/select'
+import Chat from '@/lib/db/models/chat-model'
 
 const Page = () => {
   const { id } = useParams()
@@ -43,9 +44,36 @@ const Page = () => {
   }, [id])
 
   const handleSubmit = async () => {
-    const userMsg = { role: 'user', content: input }
-    setMessages([...messages, userMsg])
+    if (!input.trim()) return
+
+    const chatId = typeof id === 'string' ? id : String(id ?? '')
+    const userMsg = { role: 'user', content: input, chatId }
+
+    setMessages((prev) => [...prev, userMsg])
+    setInput('')
+    setLoading(true)
+
+    try {
+      const res = await fetch('/api/id/sendMessage', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ id, prompt: input }),
+      })
+
+      const data = await res.json()
+      const assistantMsg = { role: 'assistant', content: data.response, chatId }
+
+      setMessages((prev) => [...prev, assistantMsg])
+    } catch (error) {
+      console.error('Error sending message:', error)
+    } finally {
+      setLoading(false)
+    }
   }
+
+  // useEffect(() => {
+  //   console.log('Messages updated:', messages)
+  // }, [messages])
 
   return (
     <div className='h-screen flex flex-col '>
@@ -62,9 +90,11 @@ const Page = () => {
       <div className='sticky bottom-0  '>
         <div className='px-5  border border-gray-700 bg-[#111]  rounded-3xl pb-3 '>
           <Textarea
+            value={input}
             placeholder='Ask anything...'
             className='flex-1 text-lg resize-none rounded-md p-3 text-white  placeholder:text-gray-400 focus:outline-none focus:ring-0 focus:border-transparent border-none'
             rows={2}
+            onKeyDown={(e) => e.key === 'Enter' && handleSubmit()}
             onChange={(e) => setInput(e.target.value)}
           />
 
@@ -84,6 +114,7 @@ const Page = () => {
             </div>
             <Button
               onClick={handleSubmit}
+              disabled={loading}
               size='icon'
               className=' h-12 w-12 shrink-0 rounded-full bg-gray-800 text-white hover:bg-gray-700 transition'
             >
