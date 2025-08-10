@@ -21,7 +21,7 @@ export async function AppSidebar() {
 
   return (
     <Sidebar>
-      <SidebarContent>
+      <SidebarContent className='custom-scrollbar'>
         <SidebarGroup>
           <SidebarGroupLabel className='text-white text-2xl font-bold mb-4 mt-4'>
             Chats
@@ -37,9 +37,9 @@ export async function AppSidebar() {
             </SidebarMenuItem>
           </SidebarMenu>
 
-          <SidebarSeparator className='bg-gray-400 w-full m-0 mt-4' />
+          <SidebarSeparator className='bg-gray-400 w-full m-0 mt-4 ' />
           <SidebarGroupContent>
-            <SidebarMenu className='space-y-4 mt-4'>
+            <SidebarMenu className='space-y-4 mt-4 '>
               {items.data.map((item: any) => (
                 <SidebarMenuItem key={item._id} className=''>
                   <SidebarMenuButton className='text-white text-lg' asChild>
