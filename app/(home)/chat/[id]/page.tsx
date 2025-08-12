@@ -78,7 +78,7 @@ const Page = () => {
   return (
     <div className='h-screen flex flex-col '>
       {/* Messages List */}
-      <div className='flex-1 overflow-y-scroll  custom-scrollbar space-y-3 bg-black rounded p-3'>
+      <div className='flex-1 overflow-y-scroll  custom-scrollbar space-y-5 bg-black rounded p-3'>
         {messages.map((msg, idx) => (
           <ChatMessage key={idx} role={msg.role} content={msg.content} />
         ))}

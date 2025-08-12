@@ -1,13 +1,17 @@
 'use server'
 
+import { auth } from '@/auth'
 import { connectDB } from '../db'
 import Chat from '../db/models/chat-model'
 import { formatError } from '../utils'
 
 export const getChats = async () => {
   try {
+    const session = await auth()
     connectDB()
-    const res = await Chat.find().sort({ createdAt: -1 })
+    const res = await Chat.find({
+      userId: session?.user?.id,
+    }).sort({ createdAt: -1 })
     return {
       message: 'Chats fetched successfully',
       data: JSON.parse(JSON.stringify(res)),
