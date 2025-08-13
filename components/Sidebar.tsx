@@ -30,9 +30,11 @@ export async function AppSidebar() {
           <SidebarMenu>
             <SidebarMenuItem>
               <SidebarMenuButton asChild>
-                <Button className='bg-white'>
-                  <Plus /> New Chat
-                </Button>
+                <Link href='/'>
+                  <Button className='bg-white w-full rounded-lg'>
+                    <Plus /> New Chat
+                  </Button>
+                </Link>
               </SidebarMenuButton>
             </SidebarMenuItem>
           </SidebarMenu>

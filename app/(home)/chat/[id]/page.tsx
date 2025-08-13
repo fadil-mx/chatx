@@ -1,6 +1,6 @@
 'use client'
 
-import React, { use, useEffect, useState } from 'react'
+import React, { use, useEffect, useRef, useState } from 'react'
 import { useParams } from 'next/navigation'
 import ChatMessage from '@/components/ChatMessage'
 import { Textarea } from '@/components/ui/textarea'
@@ -23,6 +23,9 @@ const Page = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
+  const [model, setModel] = useState('gemma3:4b')
+
+  const messagesEndRef = useRef<HTMLDivElement | null>(null)
 
   useEffect(() => {
     const fetchMessages = async () => {
@@ -57,7 +60,7 @@ const Page = () => {
       const res = await fetch('/api/id/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, prompt: input }),
+        body: JSON.stringify({ id, prompt: input, modelName: model }),
       })
 
       const data = await res.json()
@@ -71,9 +74,14 @@ const Page = () => {
     }
   }
 
+  //to scroll to down whenever  the messages get updated
+  useEffect(() => {
+    messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
+  }, [messages])
+
   // useEffect(() => {
-  //   console.log('Messages updated:', messages)
-  // }, [messages])
+  //   console.log('Messages updated:', model)
+  // }, [model])
 
   return (
     <div className='h-screen flex flex-col '>
@@ -83,7 +91,12 @@ const Page = () => {
           <ChatMessage key={idx} role={msg.role} content={msg.content} />
         ))}
 
-        {loading && <ChatMessage role='assistant' content='Typing...' />}
+        {loading && (
+          <div className='max-w-5xl  mx-auto'>
+            <div className='loader'></div>
+          </div>
+        )}
+        <div ref={messagesEndRef} />
       </div>
 
       {/* Input Area */}
@@ -101,14 +114,19 @@ const Page = () => {
           <div className='flex justify-between'>
             <div className='flex gap-4'>
               <Plus className='h-10 w-10  text-white rounded-full' />
-              <Select>
+              <Select
+                value={model.toString()}
+                onValueChange={(value) => {
+                  setModel(value)
+                }}
+              >
                 <SelectTrigger className=' hover:bg-gray-700 transition bg-gray-800 text-white border-none'>
-                  <SelectValue placeholder='gemma3:4b' />
+                  <SelectValue>{model}</SelectValue>
                 </SelectTrigger>
                 <SelectContent className='bg-gray-700 text-white'>
-                  <SelectItem value='light'>gemma3:4b</SelectItem>
-                  <SelectItem value='dark'>Dark</SelectItem>
-                  <SelectItem value='system'>System</SelectItem>
+                  <SelectItem value='gemma3:4b'>gemma3:4b</SelectItem>
+                  <SelectItem value='gemma3n:e2b'>gemma3n:e2b </SelectItem>
+                  <SelectItem value='deepseek-r1:7b'>deepseek-r1:7b</SelectItem>
                 </SelectContent>
               </Select>
             </div>
