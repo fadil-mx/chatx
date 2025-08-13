@@ -51,9 +51,11 @@ export async function AppSidebar() {
                         className='flex items-center gap-2'
                       >
                         <MessageSquare size={28} />
-                        <span>{item.title}.....</span>
+                        <span className='truncate max-w-[150px] block'>
+                          {item.title}
+                        </span>
                       </Link>
-                      <Edit />
+                      <Edit chatId={item._id} />
                     </div>
                   </SidebarMenuButton>
                 </SidebarMenuItem>

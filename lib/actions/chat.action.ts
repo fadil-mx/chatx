@@ -4,6 +4,7 @@ import { auth } from '@/auth'
 import { connectDB } from '../db'
 import Chat from '../db/models/chat-model'
 import { formatError } from '../utils'
+import Message from '../db/models/Message-model.ts'
 
 export const getChats = async () => {
   try {
@@ -32,10 +33,34 @@ export const renameChat = async (chatId: string, name: string) => {
     if (!chat) {
       throw new Error('Chat not found')
     }
+    chat.title = name
+    await chat.save()
     return {
-      message: 'Chat fetched successfully',
-      data: JSON.parse(JSON.stringify(chat)),
+      message: 'Name Changed Successfully',
       status: 'success',
     }
-  } catch (error) {}
+  } catch (error) {
+    return {
+      message: formatError(error),
+      success: false,
+    }
+  }
+}
+
+export const deleteChat = async (chatId: string) => {
+  try {
+    await connectDB()
+    await Chat.findByIdAndDelete(chatId)
+    await Message.deleteMany({ chatId })
+
+    return {
+      message: 'Chat  deleted successfully',
+      status: 'success',
+    }
+  } catch (error) {
+    return {
+      message: formatError(error),
+      success: false,
+    }
+  }
 }
