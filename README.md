@@ -34,48 +34,41 @@ Run these commands to install:
 ollama pull gemma3n:e2b
 ollama pull gemma3:4b
 ollama pull deepseek-r1:7b
+```
+
 Or check what’s already installed:
-
-bash
-Copy
-Edit
+```bash
 ollama list
-Models this app is set up for:
+```
 
-makefile
-Copy
-Edit
+Models this app is set up for:
+```bash
 NAME              SIZE
 gemma3n:e2b       5.6 GB
 gemma3:4b         3.3 GB
 deepseek-r1:7b    4.7 GB
-✨ Features
-🔐 User Authentication (NextAuth + Email/Password)
+```
 
-💬 Clean ChatGPT-like UI (mobile-friendly)
+---
 
-🔄 Switch between Ollama models (Gemma, DeepSeek, etc.)
+## ✨ Features
+- 🔐 **User Authentication** (NextAuth + Email/Password)
+- 💬 **Clean ChatGPT-like UI** (mobile-friendly)
+- 🔄 **Switch between Ollama models**(Gemma, DeepSeek, etc.)
+- 📜 **Chat History Sidebar** (rename & delete chats)
+- ⏳ **Streaming / Typing Effect**
+- 🗄 **Local MongoDB storage** (no cloud required)
+- 🌙 **Dark mode** 
+- ⚡ **Runs entirely on your machine – your data stays private**
 
-📜 Chat History Sidebar (rename & delete chats)
+---
 
-⏳ Streaming / Typing Effect
-
-🗄 Local MongoDB storage (no cloud required)
-
-🌙 Dark mode support
-
-⚡ Runs entirely on your machine – your data stays private
-
-🚀 Tech Stack
-Frontend: Next.js (App Router) + Tailwind CSS
-
-Backend: Node.js API routes
-
-Database: MongoDB (local)
-
-Auth: NextAuth.js
-
-AI Engine: Ollama (local LLM runner)
+## 🚀 Tech Stack
+- **Frontend:** Next.js (App Router) + Tailwind CSS
+- **Backend:** Node.js API routes
+- **Database:** MongoDB (local)
+- **Auth:** NextAuth.js
+- **AI Engine:** Ollama (local LLM runner)
 
 📦 Installation
 1️⃣ Install Dependencies
