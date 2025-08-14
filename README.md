@@ -70,40 +70,39 @@ deepseek-r1:7b    4.7 GB
 - **Auth:** NextAuth.js
 - **AI Engine:** Ollama (local LLM runner)
 
-📦 Installation
+---
+
+##  📦 Installation
 1️⃣ Install Dependencies
-bash
-Copy
-Edit
+```bash
 npm install
+```
+
 2️⃣ Install & Start Ollama
 Follow Ollama install instructions for Linux.
 
 Check models:
 
-bash
-Copy
-Edit
+```bash
 ollama list
-Start Ollama service:
+```
 
-bash
-Copy
-Edit
+Start Ollama service:
+```bash
 sudo systemctl start ollama
+```
+
 3️⃣ Set up MongoDB
 If using local MongoDB:
-
-bash
-Copy
-Edit
+```bash
 sudo systemctl start mongod
+```
+
 4️⃣ Configure Environment Variables
 Create .env.local:
-
-env
-Copy
-Edit
+```bash
 MONGODB_URI=mongodb://localhost:27017/ollamachat
-NEXTAUTH_SECRET=supersecretvalue
 NEXTAUTH_URL=http://localhost:3000
+AUTH_GOOGLE_ID="......"
+AUTH_GOOGLE_SECRET"...."
+```
