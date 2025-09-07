@@ -17,8 +17,8 @@ export default function ChatMessage({
       <div
         className={`p-4  whitespace-pre-wrap ${
           isUser
-            ? ' bg-gray-800 rounded-2xl max-w-fit text-lg text-white self-end ml-auto '
-            : ' bg-[#171717] text-lg  rounded-lg text-gray-100 self-start mr-auto'
+            ? ' bg-gray-800 rounded-2xl max-w-fit text-md text-white self-end ml-auto '
+            : ' bg-[#171717] text-md  rounded-lg text-gray-100 self-start mr-auto'
         }`}
       >
         <ReactMarkdown

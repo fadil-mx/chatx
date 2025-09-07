@@ -31,7 +31,7 @@ const Navbar = async () => {
         <div className=''>
           <DropdownMenu>
             <DropdownMenuTrigger>
-              <Avatar className='w-12 h-12 border-none outline-none'>
+              <Avatar className='w-10 h-10 border-none outline-none'>
                 <AvatarImage src='https://github.com/shadcn.png' />
                 <AvatarFallback>CN</AvatarFallback>
               </Avatar>

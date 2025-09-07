@@ -16,6 +16,7 @@ import {
 } from '@/components/ui/select'
 import Chat from '@/lib/db/models/chat-model'
 import { Label } from '@radix-ui/react-label'
+import Image from 'next/image'
 
 const Page = () => {
   const { id } = useParams()
@@ -25,6 +26,7 @@ const Page = () => {
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
   const [file, setFile] = useState<File | null>(null)
+  const [preview, setPreview] = useState<string | null>(null)
   const [model, setModel] = useState('gemma3:4b')
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
@@ -55,6 +57,7 @@ const Page = () => {
     if (file) {
       const formData = new FormData()
       formData.append('file', file)
+      setPreview(null)
 
       const uplodedFilePath = await fetch('/api/upload', {
         method: 'POST',
@@ -62,7 +65,7 @@ const Page = () => {
       })
       const data = await uplodedFilePath.json()
       imgpath = data.filePath
-      // console.log('File uploaded to:', imgpath)
+      console.log('File uploaded to:', imgpath)
     }
 
     const chatId = typeof id === 'string' ? id : String(id ?? '')
@@ -117,12 +120,24 @@ const Page = () => {
             <div className='loader'></div>
           </div>
         )}
+
         <div ref={messagesEndRef} />
       </div>
 
       {/* Input Area */}
       <div className='sticky bottom-0  '>
         <div className='px-5  border border-gray-700 bg-[#111]  rounded-3xl pb-3 '>
+          {preview && (
+            <div className='mt-4'>
+              <Image
+                src={preview}
+                alt='preview'
+                width={180}
+                height={150}
+                className='rounded-lg'
+              />
+            </div>
+          )}
           <Textarea
             value={input}
             placeholder='Ask anything...'
@@ -141,9 +156,12 @@ const Page = () => {
                 type='file'
                 className='hidden'
                 id='file-upload'
-                onChange={(e) => {
-                  if (e.target.files) {
-                    setFile(e.target.files[0])
+                onChange={async (e) => {
+                  const selectedFile = e.target.files?.[0]
+                  if (selectedFile) {
+                    setFile(selectedFile)
+                    const objectUrl = URL.createObjectURL(selectedFile)
+                    setPreview(objectUrl)
                   }
                 }}
               />

@@ -44,7 +44,7 @@ export async function AppSidebar() {
             <SidebarMenu className='space-y-4 mt-4 '>
               {items.data.map((item: any) => (
                 <SidebarMenuItem key={item._id} className=''>
-                  <SidebarMenuButton className='text-white text-lg' asChild>
+                  <SidebarMenuButton className='text-white text-[16px]' asChild>
                     <div className='w-full  flex items-center justify-between '>
                       <Link
                         href={`/chat/${item._id}`}
