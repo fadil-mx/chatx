@@ -11,19 +11,25 @@ export async function POST(req: NextRequest) {
     content: data.prompt,
   })
 
+  const body: any = {
+    model: data.modelName,
+    messages: [
+      {
+        role: 'user',
+        content: data.prompt,
+      },
+    ],
+    stream: false,
+  }
+
+  if (data.image) {
+    body.messages[0].image = [data.image]
+  }
+
   const response = await fetch('http://localhost:11434/api/chat', {
     method: 'POST',
     headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({
-      model: data.modelName,
-      messages: [
-        {
-          role: 'user',
-          content: data.prompt,
-        },
-      ],
-      stream: false,
-    }),
+    body: JSON.stringify(body),
   })
 
   const result = await response.json()

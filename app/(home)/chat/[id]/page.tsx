@@ -15,6 +15,7 @@ import {
   SelectValue,
 } from '@/components/ui/select'
 import Chat from '@/lib/db/models/chat-model'
+import { Label } from '@radix-ui/react-label'
 
 const Page = () => {
   const { id } = useParams()
@@ -23,6 +24,7 @@ const Page = () => {
   const [messages, setMessages] = useState<Message[]>([])
   const [loading, setLoading] = useState(false)
   const [input, setInput] = useState('')
+  const [file, setFile] = useState<File | null>(null)
   const [model, setModel] = useState('gemma3:4b')
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
@@ -49,6 +51,20 @@ const Page = () => {
   const handleSubmit = async () => {
     if (!input.trim()) return
 
+    let imgpath = ''
+    if (file) {
+      const formData = new FormData()
+      formData.append('file', file)
+
+      const uplodedFilePath = await fetch('/api/upload', {
+        method: 'POST',
+        body: formData,
+      })
+      const data = await uplodedFilePath.json()
+      imgpath = data.filePath
+      // console.log('File uploaded to:', imgpath)
+    }
+
     const chatId = typeof id === 'string' ? id : String(id ?? '')
     const userMsg = { role: 'user', content: input, chatId }
 
@@ -60,7 +76,12 @@ const Page = () => {
       const res = await fetch('/api/id/sendMessage', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
-        body: JSON.stringify({ id, prompt: input, modelName: model }),
+        body: JSON.stringify({
+          id,
+          prompt: input,
+          modelName: model,
+          image: imgpath,
+        }),
       })
 
       const data = await res.json()
@@ -79,9 +100,9 @@ const Page = () => {
     messagesEndRef.current?.scrollIntoView({ behavior: 'smooth' })
   }, [messages])
 
-  // useEffect(() => {
-  //   console.log('Messages updated:', model)
-  // }, [model])
+  useEffect(() => {
+    console.log('Messages updated:', file)
+  }, [file])
 
   return (
     <div className='h-screen flex flex-col '>
@@ -113,12 +134,25 @@ const Page = () => {
 
           <div className='flex justify-between'>
             <div className='flex gap-4'>
-              <Plus className='h-10 w-10  text-white rounded-full' />
+              <Label htmlFor='file-upload'>
+                <Plus className='h-10 w-10  text-white rounded-full' />
+              </Label>
+              <input
+                type='file'
+                className='hidden'
+                id='file-upload'
+                onChange={(e) => {
+                  if (e.target.files) {
+                    setFile(e.target.files[0])
+                  }
+                }}
+              />
               <Select
                 value={model.toString()}
                 onValueChange={(value) => {
                   setModel(value)
                 }}
+                disabled={loading}
               >
                 <SelectTrigger className=' hover:bg-gray-700 transition bg-gray-800 text-white border-none'>
                   <SelectValue>{model}</SelectValue>
@@ -127,6 +161,7 @@ const Page = () => {
                   <SelectItem value='gemma3:4b'>gemma3:4b</SelectItem>
                   <SelectItem value='gemma3n:e2b'>gemma3n:e2b </SelectItem>
                   <SelectItem value='deepseek-r1:7b'>deepseek-r1:7b</SelectItem>
+                  <SelectItem value='llava'>llava (for image)</SelectItem>
                 </SelectContent>
               </Select>
             </div>
