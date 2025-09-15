@@ -44,49 +44,49 @@ You’ll need to have them downloaded locally before running the app.
 ollama pull gemma3n:e2b
 ollama pull gemma3:4b
 ollama pull deepseek-r1:7b
+ollama pull llava:latest
 ```
 
 ## ✨ Features
 
--🔐 User Authentication (NextAuth + Email/Password)
--💬 Clean Chat UI (mobile-friendly, ChatGPT-like)
--🔄 Switch between Ollama models (Gemma, DeepSeek, etc.)
--📜 Chat History Sidebar (rename & delete chats)
--⏳ Streaming / Typing Effect
--🗄 Local MongoDB storage (no cloud required)
--🌙 Dark mode support
--⚡ Runs entirely on your machine – your data stays private
+- 🔐 User Authentication (NextAuth + Email/Password).
+- 💬 Clean Chat UI (mobile-friendly, ChatGPT-like).
+- 🔄 Switch between Ollama models (Gemma, DeepSeek, etc.).
+- 💬 image recoganisation .
+- 📜 Chat History Sidebar (rename & delete chats).
+- ⏳ Streaming / Typing Effect.
+- 🗄 Local MongoDB storage (no cloud required).
+- 🌙 Dark mode support.
+- ⚡ Runs entirely on your machine – your data stays private.
 
 ## 🚀 Tech Stack
 
--Frontend: Next.js (App Router) + Tailwind CSS
--Backend: Node.js API routes
--Database: MongoDB (local)
--Auth: NextAuth.js
--AI Engine: Ollama (local LLM runner)
+-Frontend: Next.js (App Router) + Tailwind CSS.
+-Backend: Node.js API routes.
+-Database: MongoDB (local).
+-Auth: NextAuth.js.
+-AI Engine: Ollama (local LLM runner).
 
 ---
 
 ## 📦 Installation
 
-```bash
 1️⃣ Install Dependencies
+
+```bash
 npm install
 ```
 
 2️⃣ Install & Start Ollama
 Follow Ollama install instructions for Linux.
-
-```bash
 Check models:
-ollama list
-```
-
-Start Ollama service:
 
 ```bash
 sudo systemctl start ollama
 ```
 
-3️⃣ start
+3️⃣Run
+
+```bash
 npm run dev
+```
