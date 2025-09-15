@@ -61,11 +61,11 @@ ollama pull llava:latest
 
 ## 🚀 Tech Stack
 
--Frontend: Next.js (App Router) + Tailwind CSS.
--Backend: Node.js API routes.
--Database: MongoDB (local).
--Auth: NextAuth.js.
--AI Engine: Ollama (local LLM runner).
+- Frontend: Next.js (App Router) + Tailwind CSS.
+- Backend: Node.js API routes.
+- Database: MongoDB (local).
+- Auth: NextAuth.js.
+- AI Engine: Ollama (local LLM runner).
 
 ---
 
@@ -78,7 +78,7 @@ npm install
 ```
 
 2️⃣ Install & Start Ollama
-Follow Ollama install instructions for Linux.
+Follow [Ollama install instructions] (https://ollama.com/download) for Linux.
 Check models:
 
 ```bash
