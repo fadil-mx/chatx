@@ -77,8 +77,10 @@ ollama pull llava:latest
 npm install
 ```
 
-2️⃣ Install & Start Ollama
-Follow [Ollama install instructions] (https://ollama.com/download) for Linux.
+## 2️⃣ Install & Start Ollama
+
+Follow [Ollama install instructions](https://ollama.com/download) for Linux.
+
 Check models:
 
 ```bash
