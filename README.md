@@ -1,6 +1,6 @@
-# 🧠 LocalMind – A Self-Hosted AI Chat App
+# 🧠 LocalMind – Your Local AI Assistant
 
-A full-stack **AI chat application** built with **Next.js**, **Tailwind CSS**, and **Ollama** (running locally).  
+A full-stack **self-hosted AI assistant** built with **Next.js**, **Tailwind CSS**, and **Ollama** (running locally).  
 Supports **multiple AI models**, **chat history**, **authentication**, and **local MongoDB storage** for maximum privacy.
 
 ---
