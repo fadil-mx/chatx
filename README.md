@@ -25,3 +25,68 @@ With **LocalMind**:
 ---
 
 ## 🖥 Tested Environment
+
+- **OS:** Arch Linux (should work on other Linux distros with Ollama installed)
+- **Node.js:** v20+
+- **MongoDB:** Local instance (v6+)
+- **Ollama:** Latest version
+
+---
+
+## 🤖 Required Ollama Models
+
+This project supports multiple models and lets you **switch between them in the UI**.  
+You’ll need to have them downloaded locally before running the app.
+
+**Install models:**
+
+```bash
+ollama pull gemma3n:e2b
+ollama pull gemma3:4b
+ollama pull deepseek-r1:7b
+```
+
+## ✨ Features
+
+-🔐 User Authentication (NextAuth + Email/Password)
+-💬 Clean Chat UI (mobile-friendly, ChatGPT-like)
+-🔄 Switch between Ollama models (Gemma, DeepSeek, etc.)
+-📜 Chat History Sidebar (rename & delete chats)
+-⏳ Streaming / Typing Effect
+-🗄 Local MongoDB storage (no cloud required)
+-🌙 Dark mode support
+-⚡ Runs entirely on your machine – your data stays private
+
+## 🚀 Tech Stack
+
+-Frontend: Next.js (App Router) + Tailwind CSS
+-Backend: Node.js API routes
+-Database: MongoDB (local)
+-Auth: NextAuth.js
+-AI Engine: Ollama (local LLM runner)
+
+---
+
+## 📦 Installation
+
+```bash
+1️⃣ Install Dependencies
+npm install
+```
+
+2️⃣ Install & Start Ollama
+Follow Ollama install instructions for Linux.
+
+```bash
+Check models:
+ollama list
+```
+
+Start Ollama service:
+
+```bash
+sudo systemctl start ollama
+```
+
+3️⃣ start
+npm run dev
