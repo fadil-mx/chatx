@@ -1,0 +1,22 @@
+services:
+  server:
+    depends_on:
+      - db
+    build:
+      context: .
+    ports:
+      - 3000:3000
+    env_file:
+      - .env
+
+  db:
+    image: mongo:latest
+    container_name: ollamachat_mongo
+    restart: always
+    ports:
+      - '27018:27017'
+    volumes:
+      - docker_chatx_data:/data/db
+
+volumes:
+  docker_chatx_data:
