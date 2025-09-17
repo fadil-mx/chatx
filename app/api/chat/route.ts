@@ -23,7 +23,7 @@ export async function POST(req: NextRequest) {
     content: prompt,
   })
 
-  const resposnse = await fetch('http://localhost:11434/api/chat', {
+  const resposnse = await fetch('http://ollama:11434/api/chat', {
     method: 'POST',
     headers: {
       'Content-type': 'application/json',

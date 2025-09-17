@@ -2,6 +2,7 @@ services:
   server:
     depends_on:
       - db
+      - ollama
     build:
       context: .
     ports:
@@ -18,5 +19,17 @@ services:
     volumes:
       - docker_chatx_data:/data/db
 
+  ollama:
+    image: ollama/ollama:latest
+    container_name: ollama
+    ports:
+      - '11434:11434'
+    volumes:
+      - ollama_data:/root/.ollama
+    environment:
+      - NVIDIA_VISIBLE_DEVICES=all
+    restart: unless-stopped
+
 volumes:
   docker_chatx_data:
+  ollama_data:
