@@ -27,7 +27,8 @@ const Page = () => {
   const [input, setInput] = useState('')
   const [file, setFile] = useState<File | null>(null)
   const [preview, setPreview] = useState<string | null>(null)
-  const [model, setModel] = useState('gemma3:4b')
+  const [model, setModel] = useState('qwen3:1.7B')
+  const [models, setModels] = useState([])
 
   const messagesEndRef = useRef<HTMLDivElement | null>(null)
 
@@ -49,6 +50,21 @@ const Page = () => {
 
     fetchMessages()
   }, [id])
+
+  useEffect(() => {
+    const fetchModels = async () => {
+      try {
+        const res = await fetch('/api/models')
+        const data = await res.json()
+        setModels(data.models)
+        // console.log('Available models:', data)
+      } catch (err) {
+        console.error('Failed to load models', err)
+      }
+    }
+
+    fetchModels()
+  }, [])
 
   const handleSubmit = async () => {
     if (!input.trim()) return
@@ -176,10 +192,15 @@ const Page = () => {
                   <SelectValue>{model}</SelectValue>
                 </SelectTrigger>
                 <SelectContent className='bg-gray-700 text-white'>
-                  <SelectItem value='gemma3:4b'>gemma3:4b</SelectItem>
+                  {/* <SelectItem value='gemma3:4b'>gemma3:4b</SelectItem>
                   <SelectItem value='gemma3n:e2b'>gemma3n:e2b </SelectItem>
                   <SelectItem value='deepseek-r1:7b'>deepseek-r1:7b</SelectItem>
-                  <SelectItem value='llava'>llava (for image)</SelectItem>
+                  <SelectItem value='llava'>llava (for image)</SelectItem> */}
+                  {models.map((m: any) => (
+                    <SelectItem key={m.name} value={m.name}>
+                      {m.name}
+                    </SelectItem>
+                  ))}
                 </SelectContent>
               </Select>
             </div>

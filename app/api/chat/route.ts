@@ -29,7 +29,7 @@ export async function POST(req: NextRequest) {
       'Content-type': 'application/json',
     },
     body: JSON.stringify({
-      model: 'gemma3:4b',
+      model: 'qwen3:1.7B',
       messages: [
         {
           role: 'user',

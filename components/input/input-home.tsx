@@ -17,8 +17,9 @@ const Inputhome = () => {
       body: JSON.stringify({ prompt: text }),
     })
     const data = await res.json()
-    alert(`Response: ${data.message} Chat ID: ${data.chatId}`)
+    // alert(`Response: ${data.message} Chat ID: ${data.chatId}`)
     router.push(`/chat/${data.chatId}`)
+    router.refresh()
   }
 
   return (

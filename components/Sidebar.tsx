@@ -42,24 +42,31 @@ export async function AppSidebar() {
           <SidebarSeparator className='bg-gray-400 w-full m-0 mt-4 ' />
           <SidebarGroupContent>
             <SidebarMenu className='space-y-4 mt-4 '>
-              {items.data.map((item: any) => (
-                <SidebarMenuItem key={item._id} className=''>
-                  <SidebarMenuButton className='text-white text-[16px]' asChild>
-                    <div className='w-full  flex items-center justify-between '>
-                      <Link
-                        href={`/chat/${item._id}`}
-                        className='flex items-center gap-2'
-                      >
-                        <MessageSquare size={28} />
-                        <span className='truncate max-w-[150px] block'>
-                          {item.title}
-                        </span>
-                      </Link>
-                      <Edit chatId={item._id} />
-                    </div>
-                  </SidebarMenuButton>
-                </SidebarMenuItem>
-              ))}
+              {items ? (
+                items.data.map((item: any) => (
+                  <SidebarMenuItem key={item._id} className=''>
+                    <SidebarMenuButton
+                      className='text-white text-[16px]'
+                      asChild
+                    >
+                      <div className='w-full  flex items-center justify-between '>
+                        <Link
+                          href={`/chat/${item._id}`}
+                          className='flex items-center gap-2'
+                        >
+                          <MessageSquare size={28} />
+                          <span className='truncate max-w-[150px] block'>
+                            {item.title}
+                          </span>
+                        </Link>
+                        <Edit chatId={item._id} />
+                      </div>
+                    </SidebarMenuButton>
+                  </SidebarMenuItem>
+                ))
+              ) : (
+                <div className='text-white text-center'>No Chats Found</div>
+              )}
             </SidebarMenu>
           </SidebarGroupContent>
         </SidebarGroup>
